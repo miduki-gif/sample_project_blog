@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//上記の書き方をすることでララベルの組み込みサーバーを動かすコマンドを入力した際に
+//ララベルのデフォルトページが表示されていた
+
+//Route::get('/', function () {
+// return view('welcome');
+//});
+
+//ブログ一覧画面を表示するルーティング定義
+//ルーティングには名前を付けることができる
+//ルーティングではファイルがある場所のパスを書く必要がある
+
+Route::get('/', 'App\Http\Controllers\BlogController@showList')->name('blogs_list');
