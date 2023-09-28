@@ -14,6 +14,12 @@
 @extends('blog.layout')
 @section('title', 'ブログ一覧')
 @section('content')
+<!-- 
+①route作成（編集ボタン）
+②Controllerを作る
+③編集フォーム（View）を作る
+④データ更新機能（Model）を作る
+-->
 <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h2>ブログ記事一覧</h2>
@@ -28,12 +34,14 @@
                     <th>記事番号</th>
                     <th>タイトル</th>
                     <th>日付</th>
-                    @foreach ($blogs as $blog)
+                    <th></th>
                 </tr>
+                @foreach ($blogs as $blog)
                 <tr>
                     <td>{{ $blog->id }}</td>
                     <td><a href="/blog/{{ $blog->id }}">{{ $blog->title }}</a></td>
                     <td>{{ $blog->updated_at }}</td>
+                    <td><button type="button" class="btn-primary" onclick="location. href='/blog/edit/{{ $blog->id }}'">編集</button></td>
                 </tr>
                 @endforeach
             </table>
