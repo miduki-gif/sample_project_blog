@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Http\Requests\BlogRequest;
+use Illuminate\Support\Facades\DB;
+
 
 class BlogController extends Controller
 {
@@ -37,5 +40,36 @@ class BlogController extends Controller
             return redirect(route('blogs'));
         }
         return view('blog.detail',['blog' =>$blog ]);
+    }
+        /**
+     * ブログ登録画面を表示する
+     *  @return view
+     */
+        public function showCreate()
+        {
+            return view('blog.form');
+        }
+            /**
+     * ブログ登録する
+     *  @return view
+     */
+    public function exeStore(BlogRequest $request)
+    {
+        //ブログのデータを受け取る
+        $inputs = $request->all();
+
+        DB::beginTransaction();
+
+        try{
+             //ブログ登録
+            Blog::create($inputs);
+            DB::commit();
+        }catch(\Throwable $e){
+            DB::rollBack();
+            abort(500);
+        }
+       
+        Session()->flash('err_msg','ブログを登録しました');
+        return redirect(route('blogs'));
     }
 }
