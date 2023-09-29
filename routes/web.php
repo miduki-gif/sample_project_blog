@@ -46,5 +46,8 @@ Route::get('/blog/{id}', 'App\Http\Controllers\BlogController@showDetail')->name
 Route::get('/blog/edit/{id}', 'App\Http\Controllers\BlogController@showEdit')->name('edit');
 //ブログ編集したものを更新
 Route::post('/blog/update', 'App\Http\Controllers\BlogController@exeUpdate')->name('update');
+//ブログ削除
+Route::post('/blog/delete/{id}', 'App\Http\Controllers\BlogController@exeDelete')->name('delete');
+
 
 
